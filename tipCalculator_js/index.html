@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="./css/styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;800;900&family=Poppins&display=swap" rel="stylesheet">
+	<title>Tips Calculator</title>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<p class="title">TIP CALCULATOR</p>
+		</header>
+		<div class="Menu">
+			<p>How much was the bill?</p>
+			<input type="number" name="money" id="bill" placeholder="How much?">
+			<p>How was the sevice?</p>
+			<select class="input" id="service">
+				<option>Very good</option>
+				<option>Good</option>
+				<option>Regular</option>
+				<option>Bad</option>
+			</select>
+			<p>How many people share the bill?</p></p>
+			<input type="number" name="numPeople" id="people" placeholder="Number of people"><br>
+			<button>Calculate</button>
+			<div class="result">
+				<p class="sum" id="tip">0€</p>
+			</div>
+		</div>
+	</div>
+
+	<script type='text/javascript' src='./js/app.js'></script>
+</body>
+</html>

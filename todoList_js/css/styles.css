@@ -25,7 +25,7 @@ form {
 
 form input, form button {
 	padding: 0.5rem;
-	font-size: 2rem;
+	font-size: 1.65rem;
 	border: none;
 	background-color: white;
 	/*border-radius: 15px;
@@ -101,4 +101,41 @@ form button:hover {
 .fall {
 	transform: translateY(8rem) rotateZ(20deg);
 	opacity: 0;
+}
+
+select{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+	border: none;
+}
+
+.select{
+	margin: 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+select {
+	color: #89beb3;
+	width: 10rem;
+	cursor: pointer;
+	padding: 1rem;
+}
+
+.select::after {
+	content: "\25BC";
+	position: absolute;
+	background: #89beb3;
+	top: 0;
+	right: 0;
+	padding: 1rem;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.select:hover::after{
+	background-color: white;
+	color: #89beb3;
 }

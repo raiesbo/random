@@ -1,0 +1,30 @@
+body{
+	font-family: 'Poppins', sans-serif;
+	color: rgba(0,0,0,.5);
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 0.5rem;
+	top: 15%;
+	margin: 0;
+	padding-top: 0;
+	background: linear-gradient(to right, red , yellow);
+}
+
+header{
+	font-size: 2rem;
+}
+
+input{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+	border: none;
+	margin: 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+h3{
+	font-size: 90%;
+}

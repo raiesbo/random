@@ -2,11 +2,16 @@ import smtplib
 from email.message import EmailMessage
 from string import Template  # using the $ we can substitute variables within text
 from pathlib import Path  # allows us to access the html file
+import json
+
+# import json data
+with open('D:\\CODES\\reb_pss.json', 'r') as f:
+    cr = json.load(f)
 
 # here comes all the personal info
-email_sender_name = ""
-email_sender = ""
-email_sender_password = ""
+email_sender_name = cr["email"]["name_sender"]
+email_sender = cr["email"]["eAddress_sender"]
+email_sender_password = cr["email"]["ePass_sender"]
 email_receiver = ""
 
 html = Template(Path('./index.html').read_text())  # link to html template

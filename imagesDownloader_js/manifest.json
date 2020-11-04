@@ -1,0 +1,21 @@
+{
+    "name": "Webpage Image Downloader",
+    "description": "Chrome extention to download every picture on a webpage",
+    "version": "0.1",
+    "icons": {
+        "16": "16.png",
+        "48": "48.png",
+        "64": "64.png",
+       "128": "128.png" 
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "content_scripts": [
+        {
+        "matches": ["https://www.google.com/"],
+        "js": ["content.js"]
+        }
+    ],
+    "manifest_version": 2
+}

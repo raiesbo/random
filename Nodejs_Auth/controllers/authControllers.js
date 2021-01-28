@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // handle Errors
 const handleErrors = (err) => {
@@ -19,6 +21,14 @@ const handleErrors = (err) => {
     return errors;
 }
 
+const maxAge = 3 * 24 * 60 * 60; // Seconds, the time the token gonna last
+
+const createToken = (id) => {
+    return jwt.sign({id}, process.env.SECRET_STRING, {
+        expiresIn: maxAge
+    })
+}
+
 // routing controllers (what defines the behavier of each route).
 module.exports.signup_get = (req, res) => {
     res.render("signup");
@@ -33,11 +43,13 @@ module.exports.signup_post = async (req, res) => {
 
     // try to create a user with the body info, if not, send errornode
     try {
-        const user = await User.create({ email, password })
-        res.status(201).json(user);
+        const user = await User.create({ email, password });
+        const token = createToken(user._id);
+        res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.status(201).json({ user: user._id });
     } catch (err) {
         const errors = handleErrors(err);
-        res.status(400).json(errors)
+        res.status(400).json({errors: errors})
     }
 };
 

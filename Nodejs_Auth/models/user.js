@@ -24,20 +24,32 @@ const userSchema = new mongoose.Schema({
 // EXPRESS HOOKS
 //fire a function after doc saved to db
 // this .post refers to something happening right after something else - middleware -
-userSchema.post("save", function(doc, next) {
-    console.log("new user was created and saved", doc)
-    next();
-})
+// userSchema.post("save", function (doc, next) {
+//     console.log("new user was created and saved", doc)
+//     next();
+// })
 
 // fire a function before saving in db
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
 })
 
-
-
+//static method login
+userSchema.statics.login = async function (email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
+        const auth = await bcrypt.compare(password, user.password);
+        if (auth) {
+            return user;
+        }
+        console.log("error")
+        throw Error('incorrect password');
+    }
+    console.log("error2")
+    throw Error('incorrect email');
+};
 
 
 
@@ -45,4 +57,4 @@ userSchema.pre("save", async function(next) {
 
 const User = mongoose.model("user", userSchema);
 
- module.exports = User;
+module.exports = User;

@@ -9,5 +9,12 @@ useReducer_react/node_modules
 
 authroutes_react/node_modules
 
+reviewManager_reactNative/node_modules
+toDo_reactNative/node_modules
+toDo_reactNative/.gitignor
+
+testingWithJest_js/node_modules
+testingWithJest_js/coverage
+
 reactNative_firstSteps_react/node_modules
-reactNative_firstSteps_react/.gitignore
+reactNative_firstSteps_react/.gitignoren

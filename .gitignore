@@ -13,6 +13,8 @@ reviewManager_reactNative/node_modules
 toDo_reactNative/node_modules
 toDo_reactNative/.gitignor
 
+toDo_reduxToolkit_TNN/node_modules
+
 testingWithJest_js/node_modules
 testingWithJest_js/coverage
 

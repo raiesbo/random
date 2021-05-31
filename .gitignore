@@ -27,3 +27,6 @@ testingWithJest_js/coverage
 
 reactNative_firstSteps_react/node_modules
 reactNative_firstSteps_react/.gitignoren
+
+dataStructuresAndAlgos/node_modules
+dataStructuresAndAlgos/.gitignoren

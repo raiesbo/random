@@ -1,21 +1,33 @@
-"use strict";
-var anchor = document.querySelector('a');
-// if(anchor) {
-//     console.log(anchor.href)
-// }
-// console.log(anchor.href)
-// console.log(anchor)
-var form = document.querySelector('.new-item-form');
-// console.log(form.children)
-// input
-var type = document.querySelector('#type');
-var tofrom = document.querySelector('#tofrom');
-var details = document.querySelector('#details');
-var amount = document.querySelector('#amount');
-form.addEventListener("submit", function (event) {
+import { Invoice } from "./classes/Invoice.js";
+import { Payment } from "./classes/Payment.js";
+let docOne;
+let docTwo;
+docOne = new Invoice('yoshi', 'web work', 250);
+docTwo = new Payment('mario', 'plumbing work', 300);
+let docs = [];
+docs.push(docOne);
+docs.push(docTwo);
+// const invOne = new Invoice("Mario", "work on the mario website", 250);
+// const invTwo = new Invoice("Luigi", "work on the mario website", 300);
+// let invoices: Invoice[] = [];
+// invoices.push(invOne)
+// invoices.push(invTwo)
+// console.log(invOne, invTwo)
+// console.log(invoices)
+// console.log(invOne.format())
+const form = document.querySelector('.new-item-form');
+const type = document.querySelector('#type');
+const tofrom = document.querySelector('#tofrom');
+const details = document.querySelector('#details');
+const amount = document.querySelector('#amount');
+form.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log(type.value);
-    console.log(tofrom.value);
-    console.log(details.value);
-    console.log(amount.value);
+    let doc;
+    if (type.value === 'invoice') {
+        doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+    }
+    else {
+        doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+    }
+    console.log(doc);
 });

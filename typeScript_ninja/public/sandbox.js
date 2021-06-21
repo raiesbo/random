@@ -82,26 +82,26 @@
 // console.log(ninjaThree.name)
 console.log("testing");
 // functions
-var greetings;
-greetings = function () {
+let greetings;
+greetings = () => {
     console.log("hello world");
 };
 greetings();
-var add = function (a, b, c) {
+const add = (a, b, c) => {
     console.log(a + b);
     console.log(c);
 };
 add(2, 3);
 add(2, 3, "hi");
-var minus = function (a, b) {
+const minus = (a, b) => {
     return a - b;
 };
-var minusResult = minus(5, 6);
-var logDetails = function (uid, item) {
-    console.log(item + " has a uid of " + uid);
+let minusResult = minus(5, 6);
+const logDetails = (uid, item) => {
+    console.log(`${item} has a uid of ${uid}`);
 };
-var greet = function (user) {
-    console.log(user.name + " says hello");
+const greet = (user) => {
+    console.log(`${user.name} says hello`);
 };
 logDetails(888, "mario");
 greet({ name: "mario", uid: 58912 });
@@ -109,13 +109,13 @@ greet({ name: "mario", uid: 58912 });
 // function signatures
 // let gretters: Function;
 // example 1
-var gree;
-gree = function (name, greeting) {
-    console.log(name + " says " + greeting);
+let gree;
+gree = (name, greeting) => {
+    console.log(`${name} says ${greeting}`);
 };
 // example 2
-var calc;
-calc = function (numOne, numTwo, action) {
+let calc;
+calc = (numOne, numTwo, action) => {
     if (action === 'add') {
         return numOne + numTwo;
     }
@@ -124,7 +124,7 @@ calc = function (numOne, numTwo, action) {
     }
 };
 // example 3
-var logDets;
-logDets = function (ninja) {
-    console.log(ninja.name + " id " + ninja.age + " years old");
+let logDets;
+logDets = (ninja) => {
+    console.log(`${ninja.name} id ${ninja.age} years old`);
 };

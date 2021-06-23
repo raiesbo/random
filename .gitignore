@@ -30,3 +30,5 @@ reactNative_firstSteps_react/.gitignoren
 
 dataStructuresAndAlgos/node_modules
 dataStructuresAndAlgos/.gitignoren
+
+ts_webpack_ninja/node_modules

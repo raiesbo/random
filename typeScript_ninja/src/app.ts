@@ -3,15 +3,15 @@ import { Payment } from "./classes/Payment.js";
 import { ListTemplate } from "./classes/ListTemplate.js";
 import { HasFormatter } from "./interfaces/HasFormatter.js";
 
-let docOne: HasFormatter;
-let docTwo: HasFormatter;
+// let docOne: HasFormatter;
+// let docTwo: HasFormatter;
 
-docOne = new Invoice('yoshi', 'web work', 250)
-docTwo = new Payment('mario', 'plumbing work', 300)
+// docOne = new Invoice('yoshi', 'web work', 250)
+// docTwo = new Payment('mario', 'plumbing work', 300)
 
-let docs: HasFormatter[] = [];
-docs.push(docOne);
-docs.push(docTwo);
+// let docs: HasFormatter[] = [];
+// docs.push(docOne);
+// docs.push(docTwo);
 
 // const invOne = new Invoice("Mario", "work on the mario website", 250);
 // const invTwo = new Invoice("Luigi", "work on the mario website", 300);
@@ -48,3 +48,44 @@ form.addEventListener("submit", (event): void => {
     }
     console.log(doc)
 })
+
+// ENUMS
+
+enum ResourceType { BOOK, AUTHOR, FILM, DIRECTOR, PERSON }
+
+// generics
+
+const addUID = <T extends {name: string}>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100)
+    return {...obj, uid} 
+}
+
+let docOne = addUID({name: 'yoshi', age: 40});
+
+console.log(docOne.name)
+
+// with interfaces
+interface Resource<T> {
+    uid: number;
+    resourceName: ResourceType;
+    data: T;
+}
+
+const docThree: Resource<string> = {
+    uid: 1,
+    resourceName: ResourceType.PERSON,
+    data: 'trol'
+}
+
+// TUPLES
+
+let arr = ['ryu', 25, true];
+arr[0] = 10;
+arr[1] = 'yoshi';
+
+let tup: [string, number, boolean] = ['ryu', 25, true]
+// tup[1] = "hi" // shows an error, in that position can not be a string.
+let student: [string, number];
+// student = [3, 'chun li'] // error, not the correct order of string/number
+student = ['chun li', 2]
+

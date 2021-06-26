@@ -7,11 +7,9 @@ export default function NavBar() {
     <div className="logo">
         <h1>List</h1>
     </div>
-    <ul>
-    <li><Link href="/"><a>Home</a></Link></li>
-    <li><Link href="/about"><a>About</a></Link></li>
-    <li><Link href="/list"><a>List</a></Link></li>
-    </ul>
+    <Link href="/"><a>Home</a></Link>
+    <Link href="/about"><a>About</a></Link>
+    <Link href="/ninjas/list"><a>List</a></Link>
     </nav>
   )
 }

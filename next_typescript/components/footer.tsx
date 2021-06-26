@@ -2,8 +2,8 @@ import styles from '../styles/Home.module.css'
 
 export default function NavBar() {
   return (
-    <div>
+    <footer>
         <p>Copyright 2021</p>
-    </div>
+    </footer>
   )
 }

@@ -7,12 +7,18 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div>
+    <>
+    <Head>
+      <title>Homepage</title>
+      <meta name="keywords" content="ninjas list" />
+    </Head>
+    <div>      
       <h1 className={styles.title}>Homepage tro </h1>
       <p className={styles.text}>Hi guys!</p>
       <Link href="/ninjas/list">
         <a className={styles.btn}>See the list</a>
       </Link>
     </div>
+    </>
   )
 }

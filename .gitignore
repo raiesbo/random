@@ -34,3 +34,8 @@ dataStructuresAndAlgos/.gitignoren
 ts_webpack_ninja/node_modules
 next_typscript/node_modules
 next_typscript/.next
+
+next_contentful/node_modules
+next_contentful/.next
+
+advancedCSSandSass/advanced-css-course

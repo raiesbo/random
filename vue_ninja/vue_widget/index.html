@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title></title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="" />
+	</head>
+	<body>
+		<script src="https://unpkg.com/vue@next"></script>
+		<h1>Hello, Vue</h1>
+
+		<!-- here starts the VUE widget -->
+		<div id="app">
+			<h2>I am the template now</h2>
+			<div v-if="showBooks">
+				<p>{{ title }} - {{ author }} - {{ age }}</p>
+			</div>
+
+			<button v-on:click="age++">Increase age</button>
+			<button v-on:click="age--">Decrease age</button>
+			<div
+				@click="changeTitle('Oathbringer')"
+				style="border: 1px solid black"
+			>
+				hi
+			</div>
+			<button @click="toggleShowBooks">
+				<span v-if="showBooks">Hide Books</span>
+				<span v-else>Show Books</span>
+			</button>
+
+			<div v-show="showBooks">Currently showing books</div>
+		</div>
+
+		<script async src="app.js"></script>
+	</body>
+</html>

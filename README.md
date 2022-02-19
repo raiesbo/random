@@ -1,6 +1,5 @@
 # random
 
-
 Drawer where to store any idea, test, new concept or study that I find interesting at the moment.
 
 
@@ -8,6 +7,6 @@ Drawer where to store any idea, test, new concept or study that I find interesti
 
  - Html
  - Css
- - JS (ES6)
- - React
+ - JS (ES6) // TypeScript // React // Vue
+ - Node
  - Python

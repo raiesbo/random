@@ -1,0 +1,19 @@
+{
+  "name": "modules-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node axios-request.js",
+    "dev": "nodemon axios-request.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "nodemon": "^2.0.18"
+  }
+}

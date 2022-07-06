@@ -1,6 +1,6 @@
 const express = require('express');
-const messagesController = require('./controllers/messages.controller');
-const friendsController = require('./controllers/friends.controller');
+const friendsRouter = require('./routers/friends.router');
+const messagesRouter = require('./routers/messages.router');
 
 const app = express();
 const PORT = 3000;
@@ -16,7 +16,7 @@ app.use((req, res, next) => {
     // Everything after the next() function
     // will happen after the endpoint is triggered
     const delta = Date.now() - start;
-    console.log(`${req.method} ${req.url} ${delta}ms`)
+    console.log(`${req.method} ${req.baseUrl}${req.url} ${delta}ms`)
 })
 
 app.use(express.json());
@@ -26,12 +26,9 @@ app.get('/', (req, res) => {
     res.send('helloooo')
 });
 
-app.post('/friends', friendsController.postFriend);
-app.get('/friends', friendsController.getFriends);
-app.get('/friends/:friendId', friendsController.getFriend);
-
-app.get('/messages', messagesController.getMessages);
-app.post('/messages', messagesController.postMessage);
+// We mount it to '/friends' which will be the common url path.
+app.use('/friends', friendsRouter); 
+app.use('/messages', messagesRouter); 
 
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}.`);

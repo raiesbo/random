@@ -1,8 +1,14 @@
 const express = require('express');
+const path = require('path');
+
 const friendsRouter = require('./routers/friends.router');
 const messagesRouter = require('./routers/messages.router');
 
 const app = express();
+
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'))
+
 const PORT = 3000;
 
 // MIDDLEWARES
@@ -19,11 +25,17 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.baseUrl}${req.url} ${delta}ms`)
 })
 
+// To pass views
+app.use('/', express.static(path.join(__dirname, 'public')));
+// To pass json
 app.use(express.json());
 // END OF MIDDLEWARES
 
 app.get('/', (req, res) => {
-    res.send('helloooo')
+    res.render('index', {
+        title: 'My friends are very clever!',
+        caption: "Let's go skying!"
+    })
 });
 
 // We mount it to '/friends' which will be the common url path.

@@ -1,0 +1,21 @@
+{
+  "name": "nasa-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client:install": "npm install --prefix client",
+    "server:install": "npm install --prefix server",
+    "install": "npm run client:install && npm run server:install",
+    "client:start": "npm run start --prefix client",
+    "server:watch": "npm run watch --prefix server",
+    "watch": "npm run client:start & npm run server:watch",
+    "client:build": "npm run build --prefix client",
+    "server:start": "npm run start --prefix server",
+    "deploy": "rm -rf ../server/src/public && BUILD_PATH='../server/src/public' npm run client:build && npm run server:start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

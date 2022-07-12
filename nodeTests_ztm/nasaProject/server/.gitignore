@@ -2,3 +2,4 @@ node_modules
 src/build
 src/public
 src/dist
+public

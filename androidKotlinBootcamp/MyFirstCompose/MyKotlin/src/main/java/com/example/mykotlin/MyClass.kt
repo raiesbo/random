@@ -5,7 +5,46 @@ fun main() {
     // conditionlsTest()
     // loopsTest()
     // functionsTests()
-    collections()
+    // collections()
+
+    val car = Car(
+        color = "Purple",
+        model = "XDL"
+    )
+    val secondCar = Car(
+        color = "Green",
+        model = "GHJ"
+    )
+    car.color = "Blue"
+    car.drive()
+
+    secondCar.speed(100, 200)
+
+    println("Car color: ${car.color} model: ${car.model}")
+    println("Car color: ${secondCar.color} model: ${secondCar.model}")
+}
+
+// CLASSES
+class Car(
+    var color: String,
+    var model: String
+) {
+    init {
+        // Space that gets triggered before instantiating the object
+        if (color == "Green") {
+            println("yayyyy")
+        }
+        // color = "Yellow"
+        // model = "KLMM"
+    }
+
+    fun speed(minSpeed: Int, maxSpeed: Int) {
+        println("Min speed is $minSpeed and Max speed is $maxSpeed")
+    }
+
+    fun drive() {
+        println("Drive...Vroommmm")
+    }
 }
 
 fun typesTest() {
@@ -180,6 +219,14 @@ fun collections() {
 
     secretMap["c"] = "put data" // The same as secretMap.put("c", "put data")
 
-    println(secretMap)
+    // println(secretMap)
+
+    val empty = emptyList<String>();
+
+    val newListOfNames = listOf( "James", "Paul", "Rafael", "Gina" )
+    val found = newListOfNames.filter {
+        it == "Paul"
+    }
+    println(found)
 }
 

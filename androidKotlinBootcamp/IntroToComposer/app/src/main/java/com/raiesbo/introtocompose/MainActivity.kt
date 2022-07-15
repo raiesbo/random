@@ -10,7 +10,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-    var amount: Int = 100
+    var amount: MutableState<Int> = remember { mutableStateOf(0) }
 
     Surface(
         modifier = Modifier
@@ -47,7 +47,7 @@ fun MyApp() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "$$amount",
+                text = "$${amount.value}",
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 39.sp,
@@ -55,20 +55,31 @@ fun MyApp() {
                 )
             )
             Spacer(modifier = Modifier.height(130.dp))
-            CreateCircle()
+            CreateCircle(
+                count = amount.value
+            ) {
+                newValue -> amount.value = newValue
+            }
+            
+            if(amount.value > 50) {
+                Text(text = "Lots of money!")
+            }
         }
     }
 }
-
+// {}
 // @Preview(showBackground = true)
 @Composable
-fun CreateCircle() {
+fun CreateCircle(
+    count: Int = 0,
+    updateCounter: (Int) -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(3.dp)
             .size(105.dp)
             .clickable {
-                Log.d("Tap", "createCircle: tag")
+                updateCounter(count + 10)
             },
         shape = CircleShape,
         elevation = 4.dp

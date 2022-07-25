@@ -12,6 +12,12 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.PlusOne
+import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.rounded.PlusOne
+import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.raiesbo.jettipapp.components.InputField
 import com.raiesbo.jettipapp.ui.theme.JetTipAppTheme
+import com.raiesbo.jettipapp.widgets.RoundIconButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +60,6 @@ fun MyApp(content: @Composable () -> Unit) {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Preview(showBackground = true)
 @Composable
 fun MainContent() {
@@ -109,6 +115,10 @@ fun BillForm(
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
+    val numPeople = remember {
+        mutableStateOf(1)
+    }
+
     Surface(
         modifier = Modifier
             .padding(2.dp)
@@ -116,7 +126,11 @@ fun BillForm(
         shape = RoundedCornerShape(corner = CornerSize(12.dp)),
         border = BorderStroke(width = 1.dp, color = Color.LightGray)
     ) {
-        Column() {
+        Column(
+            modifier = Modifier.padding(6.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.Start
+        ) {
             InputField(
                 valueState = totalBillState,
                 labelId = "Enter Bill",
@@ -128,11 +142,63 @@ fun BillForm(
                     keyboardController?.hide()
                 }
             )
+            if (true) { // validState
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text = "Split",
+                        modifier = Modifier.align(
+                            alignment = Alignment.CenterVertically
+                        )
+                    )
+                    Row(
+                        modifier = Modifier.padding(horizontal = 3.dp),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        if (numPeople.value > 1) {
+                            RoundIconButton(
+                                imageVector = Icons.Default.Remove,
+                                onClick = { numPeople.value-- }
+                            )
+                        } else {
+                            Box {}
+                        }
+                        Text(
+                            text = numPeople.value.toString(),
+                            modifier = Modifier
+                                .align(Alignment.CenterVertically)
+                                .padding(start = 9.dp, end = 9.dp)
+                        )
+                        RoundIconButton(
+                            imageVector = Icons.Default.Add,
+                            onClick = { numPeople.value++ }
+                        )
+                    }
+                }
+                // Tip row
+                Row(
+                    modifier = Modifier.padding(horizontal = 3.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Text(
+                        text = "Tip",
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(start = 9.dp, end = 9.dp)
+                    )
+                }
+            } else {
+                Box {}
+            }
         }
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JetTipAppTheme {

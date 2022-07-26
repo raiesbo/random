@@ -10,14 +10,12 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Slider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.PlusOne
 import androidx.compose.material.icons.filled.Remove
-import androidx.compose.material.icons.rounded.PlusOne
-import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.raiesbo.jettipapp.components.InputField
 import com.raiesbo.jettipapp.ui.theme.JetTipAppTheme
 import com.raiesbo.jettipapp.widgets.RoundIconButton
+import kotlin.math.round
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +59,7 @@ fun MyApp(content: @Composable () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
+// @Preview(showBackground = true)
 @Composable
 fun MainContent() {
     BillForm() { billAmt ->
@@ -68,13 +67,14 @@ fun MainContent() {
     }
 }
 
-@Preview(showBackground = false)
+// @Preview(showBackground = false)
 @Composable
 fun TopHeader(totalPerPerson: Double = 134.0) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
+            .padding(15.dp)
             .clip(shape = RoundedCornerShape(corner = CornerSize(12.dp))),
         color = Color(0xFFE9D7F7)
     ) {
@@ -97,7 +97,6 @@ fun TopHeader(totalPerPerson: Double = 134.0) {
     }
 }
 
-// {}
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -115,13 +114,19 @@ fun BillForm(
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
+    val sliderPositionState = remember {
+        mutableStateOf(0f)
+    }
+
     val numPeople = remember {
         mutableStateOf(1)
     }
 
+
+
     Surface(
         modifier = Modifier
-            .padding(2.dp)
+            .padding(start = 15.dp, end = 15.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(corner = CornerSize(12.dp)),
         border = BorderStroke(width = 1.dp, color = Color.LightGray)
@@ -156,12 +161,12 @@ fun BillForm(
                         )
                     )
                     Row(
-                        modifier = Modifier.padding(horizontal = 3.dp),
+                        modifier = Modifier.padding(horizontal = 3.dp, vertical = 12.dp),
                         horizontalArrangement = Arrangement.End
                     ) {
                         if (numPeople.value > 1) {
                             RoundIconButton(
-                                imageVector = Icons.Default.Remove,
+                                imageVector = Icons.Default.Remove, // Remove Icon
                                 onClick = { numPeople.value-- }
                             )
                         } else {
@@ -181,14 +186,38 @@ fun BillForm(
                 }
                 // Tip row
                 Row(
-                    modifier = Modifier.padding(horizontal = 3.dp),
-                    horizontalArrangement = Arrangement.End
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = "Tip",
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
-                            .padding(start = 9.dp, end = 9.dp)
+                    )
+                    Text(
+                        text = "33,00 €",
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    )
+                }
+                // Tip column
+                Column(
+                    modifier = Modifier,
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "${sliderPositionState.value}%")
+                    Spacer(modifier = Modifier.height(14.dp))
+                    // Slider
+                    Slider(
+                        value = round(sliderPositionState.value * 100) / 100,
+                        onValueChange = { newVal ->
+                            sliderPositionState.value = newVal
+                            Log.d("Slider", "$newVal")
+                        },
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                        steps = 5
                     )
                 }
             } else {

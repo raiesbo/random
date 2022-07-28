@@ -2,14 +2,16 @@
 
 Space where to store any idea, test, new concept or study that I find interesting at the moment.
 
-## Main purpose
+## Purpose of the repo
 
-This repo is created as a reference to come back and check previous exercices in order to create a list of examples that can be useful when working on real projects. All the projects from this repo are based on online tutorials or my own tests.
+This repo is created as a reference to come back and check previous exercises in order to create a list of examples that can be useful when working on real projects. All the projects from this repository are based my own personal projects, tests and online tutorials.
 
-## Main technologies:
+## Main used technologies:
 
- - Html
- - Css
- - JS (ES6) // TypeScript // React // Vue
- - Node
+ - HTML/CSS
+ - JavaScript ( React // Vue // React Native )
+ - TypeScript
+ - Node ( Express // Others)
  - Python
+ - Kotlin ( Android // Jetpack Libraries )
+ - Bash

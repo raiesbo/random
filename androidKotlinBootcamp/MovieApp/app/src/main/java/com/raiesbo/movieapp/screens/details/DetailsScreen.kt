@@ -11,16 +11,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.raiesbo.movieapp.model.Movie
+import com.raiesbo.movieapp.model.getMovies
+import com.raiesbo.movieapp.widgets.HorizontalScrollableImageView
+import com.raiesbo.movieapp.widgets.MovieRow
 
 @Composable
-fun DetailsScreen(navController: NavController, movieData: String?) {
+fun DetailsScreen(navController: NavController, movieId: String?) {
+    val movie: Movie = getMovies().filter { movie ->
+        movie.id == movieId
+    }[0]
+
     Scaffold(
         topBar = {
             TopAppBar(backgroundColor = Color.LightGray, elevation = 5.dp) {
-                Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Arrow Back", modifier = Modifier.clickable {
-                        navController.popBackStack()
-                    })
+                Row(
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Arrow Back",
+                        modifier = Modifier.clickable {
+                            navController.popBackStack()
+                        }
+                    )
                     Spacer(modifier = Modifier.width(100.dp))
                     Text(text = "Movies")
                 }
@@ -32,20 +47,13 @@ fun DetailsScreen(navController: NavController, movieData: String?) {
             .fillMaxHeight()) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Top
             ) {
-                Text(text = movieData.toString(), style = MaterialTheme.typography.h5)
-                Spacer(modifier = Modifier.height(20.dp))
-                Button(onClick = {
-                    navController.popBackStack()
-                }) {
-                    Text(text = "Go Back")
-                }
+                MovieRow(movie = movie)
+                Spacer(modifier = Modifier.height(8.dp))
+                Divider()
+                HorizontalScrollableImageView(movie)
             }
         }
     }
-
-
-
-
 }

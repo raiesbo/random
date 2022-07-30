@@ -43,6 +43,7 @@ fun NoteInputText(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NoteButton(
     modifier: Modifier,
@@ -50,8 +51,13 @@ fun NoteButton(
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     Button(
-        onClick = onClick,
+        onClick = {
+            keyboardController?.hide()
+            onClick.invoke()
+        },
         modifier = modifier,
         shape = CircleShape,
         enabled = enabled

@@ -4,18 +4,17 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.raiesbo.jetnoteapp.data.NoteDataSource
-import com.raiesbo.jetnoteapp.model.Note
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.raiesbo.jetnoteapp.screen.NoteScreen
+import com.raiesbo.jetnoteapp.screen.NoteViewModel
 import com.raiesbo.jetnoteapp.ui.theme.JetNoteAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,19 +28,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val notes = remember {
-                        mutableStateListOf<Note>()
-                    }
-
-                    NoteScreen(
-                        notes = notes,
-                        onAddNote = {
-                            notes.add(it)
-                        },
-                        onRemoveNote = {
-                            notes.remove(it)
-                        }
-                    )
+                    val noteViewModel: NoteViewModel by viewModels()
+                    NotesApp(noteViewModel)
                 }
             }
         }
@@ -49,14 +37,25 @@ class MainActivity : ComponentActivity() {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun NotesApp(noteViewModel: NoteViewModel = viewModel()) {
+    NoteScreen(
+        notes = noteViewModel.getAllNotes(),
+        onAddNote = { noteViewModel.addNote(it) },
+        onRemoveNote = { noteViewModel.removeNote(it) }
+    )
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JetNoteAppTheme {
-        NoteScreen(
-            notes = NoteDataSource().loadNotes(),
-            onAddNote = {},
-            onRemoveNote = {}
-        )
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colors.background
+        ) {
+            NotesApp()
+        }
     }
 }

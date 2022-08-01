@@ -135,7 +135,7 @@ fun NoteRow(
                 style = MaterialTheme.typography.subtitle1
             )
             Text(
-                text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")),
+                text = note.entryDate.toString(),
                 style = MaterialTheme.typography.caption
             )
         }

@@ -16,7 +16,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.raiesbo.jetnoteapp.screen.NoteScreen
 import com.raiesbo.jetnoteapp.screen.NoteViewModel
 import com.raiesbo.jetnoteapp.ui.theme.JetNoteAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -29,7 +29,6 @@ import com.raiesbo.jetnoteapp.data.NoteDataSource
 import com.raiesbo.jetnoteapp.model.Note
 import java.time.format.DateTimeFormatter
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NoteScreen(
     notes: List<Note>,
@@ -105,7 +104,6 @@ fun NoteScreen(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NoteRow(
     modifier: Modifier = Modifier,
@@ -142,7 +140,6 @@ fun NoteRow(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun NotesScreenPreview() {

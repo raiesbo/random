@@ -27,6 +27,7 @@ import com.raiesbo.jetnoteapp.components.NoteButton
 import com.raiesbo.jetnoteapp.components.NoteInputText
 import com.raiesbo.jetnoteapp.data.NoteDataSource
 import com.raiesbo.jetnoteapp.model.Note
+import com.raiesbo.jetnoteapp.util.formatDate
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -133,7 +134,7 @@ fun NoteRow(
                 style = MaterialTheme.typography.subtitle1
             )
             Text(
-                text = note.entryDate.toString(),
+                text = formatDate(note.entryDate.time),
                 style = MaterialTheme.typography.caption
             )
         }

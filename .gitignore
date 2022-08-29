@@ -30,6 +30,8 @@ reactNative_firstSteps_react/.gitignoren
 
 cBasics/*.out
 cBasics/**/*.out
+cBasics/*.dSYM
+cBasics/**/*.dSYM
 
 dataStructuresAndAlgos/node_modules
 dataStructuresAndAlgos/.gitignoren

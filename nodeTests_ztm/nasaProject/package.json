@@ -11,8 +11,9 @@
     "server:watch": "npm run watch --prefix server",
     "watch": "npm run client:start & npm run server:watch",
     "client:build": "npm run build --prefix client",
-    "server:start": "npm run start --prefix server",
+    "server:start": "npm run cluster --prefix server",
     "deploy": "BUILD_PATH='../server/public' npm run client:build && npm run server:start",
+    "deploy:cluster": "BUILD_PATH='../server/public' npm run client:build && npm run server:start",
     "test": "npm run test --prefix client && npm run test --prefix server"
   },
   "keywords": [],

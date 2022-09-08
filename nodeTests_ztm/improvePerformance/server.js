@@ -10,15 +10,15 @@ async function delay(duration) {
 }
 
 app.get('/', (req, res) => {
-    return res.send('Performance example.')
+    return res.send(`Performance example ${process.pid}.`)
 })
 
 app.get('/timer', async (req, res) => {
-    delay(9000)
-    return res.send('Ding ding ding')
+    delay(5000)
+    return res.send(`Ding ding ding Dong!!! ${process.pid}.`)
 })
 
-
+// We only .listen when we start as a worker process
 app.listen(3000, () => {
     console.log("listening")
 })

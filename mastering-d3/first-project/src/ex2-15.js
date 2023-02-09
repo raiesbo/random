@@ -1,59 +1,71 @@
-// const svg = d3.select("#chart-area").append("svg")
-//     .attr("width", 400)
-//     .attr("height", 400)
+const MARGIN = { TOP: 10, RIGHT: 10, BOTTOM: 130, LEFT: 100 };
+const WIDTH = 600 - MARGIN.RIGHT - MARGIN.LEFT;
+const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 
-const data = d3.json('./data/buildings.json').then(data => {
+const svg = d3.select("#chart-area").append("svg")
+    .attr("width", WIDTH + MARGIN.RIGHT + MARGIN.LEFT)
+    .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM);
 
-    const svg = d3.select("#chart-area").append("svg")
-        .attr("width", 400)
-        .attr("height", 400)
-    const cleanData = data.map(entry => ({ ...entry, age: Number(entry.age) }));
+const g = svg.append('g')
+    .attr('transform', `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
-    const x = d3.scaleBand()
-        .domain(['Burj Khalifa', 'Shanghai Tower', 'Abraj Al-Bait Clock Tower', 'Ping An Finance Centre', 'Lotte World Tower'])
-        .range([0, 400])
-        .paddingInner(0.3)
-        .paddingOuter(0.2)
+// X Axis Label
+g.append('text')
+    .attr('class', 'x axis-label')
+    .attr('x', WIDTH / 2)
+    .attr('y', HEIGHT + 110)
+    .attr('font-size', '20px')
+    .attr('text-anchor', 'middle')
+    .text("The world's tallest buildings");
 
-    const y = d3.scaleLinear()
-        .domain([0, 828])
-        .range([0, 400])
-
-    const rects = svg.selectAll("rect").data(cleanData);
-
-    rects.enter().append("rect")
-        .attr("y", 0)
-        .attr("x", d => x(d.name))
-        .attr("width", x.bandwidth)
-        .attr("height", d => y(d.height))
-        .attr("fill", "grey");
-})
+// Y Axis Label
+g.append('text')
+    .attr('class', 'y axis-label')
+    .attr('x', - (HEIGHT / 2))
+    .attr('y', -60)
+    .attr('font-size', '20px')
+    .attr('text-anchor', 'middle')
+    .attr('transform', 'rotate(-90)')
+    .text("Height (m)");
 
 d3.json('./data/buildings_m.json').then(data => {
-    const svg = d3.select("#chart-area").append("svg")
-        .attr("width", 400)
-        .attr("height", 400)
-
     const cleanData = data.map(entry => ({ ...entry, age: Number(entry.age) }));
 
-    const headers = data.map(entry => entry.name)
-
+    // Scales
     const x = d3.scaleBand()
-        .domain(headers)
-        .range([0, 400])
+        .domain(cleanData.map(entry => entry.name))
+        .range([0, WIDTH])
         .paddingInner(0.3)
-        .paddingOuter(0.2)
+        .paddingOuter(0.2);
 
     const y = d3.scaleLinear()
-        .domain([0, 828])
-        .range([0, 400])
+        .domain([0, d3.max(data, d => d.height)])
+        .range([HEIGHT, 0]);
 
-    const rects = svg.selectAll("rect").data(cleanData);
+    const xAxisCall = d3.axisBottom(x);
+    g.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', `translate(0, ${HEIGHT})`)
+        .call(xAxisCall)
+        .selectAll('text') // Bottom Axis Text
+        .attr('y', 10)
+        .attr('x', -5)
+        .attr('text-anchor', 'end')
+        .attr('transform', 'rotate(-40)');
+
+    const yAxisCall = d3.axisLeft(y)
+        .ticks(3)
+        .tickFormat(d => `${d}m`);
+    g.append('g')
+        .attr('class', 'y axis')
+        .call(yAxisCall);
+
+    const rects = g.selectAll("rect").data(cleanData);
 
     rects.enter().append("rect")
-        .attr("y", 0)
+        .attr("y", d => y(d.height))
         .attr("x", d => x(d.name))
         .attr("width", x.bandwidth)
-        .attr("height", d => y(d.height))
+        .attr("height", d => HEIGHT - y(d.height))
         .attr("fill", "grey");
 })

@@ -50,8 +50,7 @@ advancedCSSandSass/section-7/node_modules
 advancedCSSandSass/section-8/node_modules
 advancedCSSandSass/section-9/node_modules
 
-webpackGetStarted/node_modules
-
-nodeTests_ztm/basicConcepts/modulesExample/node_modules
-nodeTests_ztm/planetsProject/node_modules
-nodeTests_ztm/expressProject/node_modules
+**/node_modules
+**/.next
+**/.env
+**/.env.local

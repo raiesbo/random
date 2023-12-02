@@ -8,10 +8,12 @@ This repo is created as a reference to come back and check previous exercises in
 
 ## Main used technologies:
 
- - HTML/CSS
- - JavaScript ( React // Vue // React Native )
+ - HTML
+ - CSS
+ - JavaScript
  - TypeScript
- - Node ( Express // Others)
+ - Node
  - Python
- - Kotlin ( Android // Jetpack Libraries )
+ - Kotlin
  - Bash
+ - Rust

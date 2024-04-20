@@ -57,4 +57,31 @@ function parse(program: string) {
 	return expr;
 }
 
+const specialForms = Object.create(null)
+
+// @ts-ignore
+function evaluate(expr: Expression, scope: { [key: string]: any }): any {
+	if (expr.type === "value") {
+		return expr.value
+	} else if (expr.type === "word") {
+		if (expr.name && expr.name in scope) {
+			return scope[expr.name]
+		} else {
+			throw new ReferenceError(`Undefined binding: ${expr.name}`)
+		}
+	} else if (expr.type === "apply") {
+		let { operator, args } = expr as { operator: { type: string, name: string }, args: Array<Expression> };
+		if (operator.type === "word" && operator.name in specialForms) {
+			return specialForms[operator.name](expr.args, scope)
+		} else {
+			let op = evaluate(operator, scope)
+			if (typeof op === "function") {
+				return op(...args?.map(arg => evaluate(arg, scope)))
+			} else {
+				throw new TypeError("Applying a non-function.")
+			}
+		}
+	}
+}
+
 console.log(parse("+(a, 10)"))

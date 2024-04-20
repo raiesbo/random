@@ -17,3 +17,5 @@ advancedCSSandSass/advanced-css-course
 **/.env.local
 **/.env
 **/coverage
+**/build
+**/dist

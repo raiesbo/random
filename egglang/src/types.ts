@@ -8,3 +8,5 @@ export type Expression = {
 }
 
 export type Value = string | number
+
+export type Scope = { [key: string]: any }

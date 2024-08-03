@@ -19,3 +19,4 @@ advancedCSSandSass/advanced-css-course
 **/coverage
 **/build
 **/dist
+**/.DS_Store

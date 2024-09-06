@@ -1,56 +1,22 @@
-Nodejs_Auth/node_modules
-Nodejs_Auth/.env
+toDo_reactNative/.gitignore
 
-redux-firstSteps/node_modules
-nodeAuth_ninja_js/node_modules
-nodeAuth_ninja_js/.env
-
-useReducer_react/node_modules
-
-authroutes_react/node_modules
-
-reviewManager_reactNative/node_modules
-toDo_reactNative/node_modules
-toDo_reactNative/.gitignor
-
-toDo_reduxToolkit_TNN/node_modules
-
-TDD_101_jest/node_modules
-
-testing_httpCalls_js/node_modules
-
-testing_unit-integration-e2e_js/node_modules
-testing_unit-integration-e2e_js/coverage
-
-testingWithJest_js/node_modules
-testingWithJest_js/coverage
-
-reactNative_firstSteps_react/node_modules
-reactNative_firstSteps_react/.gitignoren
+reactNative_firstSteps_react/.gitignore
 
 cBasics/*.out
 cBasics/**/*.out
 cBasics/*.dSYM
 cBasics/**/*.dSYM
 
-dataStructuresAndAlgos/node_modules
-dataStructuresAndAlgos/.gitignoren
-
-ts_webpack_ninja/node_modules
-next_typscript/node_modules
-next_typscript/.next
-
-next_contentful/node_modules
-next_contentful/.next
+dataStructuresAndAlgos/.gitignore
 
 advancedCSSandSass/advanced-css-course
-advancedCSSandSass/section-5/node_modules
-advancedCSSandSass/section-6/node_modules
-advancedCSSandSass/section-7/node_modules
-advancedCSSandSass/section-8/node_modules
-advancedCSSandSass/section-9/node_modules
 
 **/node_modules
 **/.next
 **/.env
 **/.env.local
+**/.env
+**/coverage
+**/build
+**/dist
+**/.DS_Store

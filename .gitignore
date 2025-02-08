@@ -15,8 +15,8 @@ advancedCSSandSass/advanced-css-course
 **/.next
 **/.env
 **/.env.local
-**/.env
 **/coverage
 **/build
 **/dist
 **/.DS_Store
+**/.idea

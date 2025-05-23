@@ -7,5 +7,5 @@ func (app *Application) getRoutes() http.Handler {
 
 	mux.HandleFunc("POST /authenticate", app.Authenticate)
 
-	return mux
+	return CorsMiddleware(mux)
 }

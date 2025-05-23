@@ -7,5 +7,7 @@ func (app *Application) routes() http.Handler {
 
 	mux.HandleFunc("POST /", app.Broker)
 
+	mux.HandleFunc("POST /handle", app.HandleSubmission)
+
 	return CorsMiddleware(mux)
 }

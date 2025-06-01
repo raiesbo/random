@@ -55,7 +55,7 @@ func (app *Application) HandleSubmission(w http.ResponseWriter, r *http.Request)
 }
 
 func (app *Application) logItem(w http.ResponseWriter, entry LogPayload) {
-	jsonData, _ := json.MarshalIndent(entry, "", "\t")
+	jsonData, _ := json.Marshal(entry)
 
 	logServiceURL := "http://logger-service/log"
 

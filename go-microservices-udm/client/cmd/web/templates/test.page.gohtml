@@ -8,6 +8,7 @@
                 <hr>
                 <a id="brokenBtn" class="btn btn-outline-secondary" href="javascript:void(0);">Test Broker</a>
                 <a id="authBrokerBtn" class="btn btn-outline-secondary" href="javascript:void(0);">Test Auth</a>
+                <a id="logBtn" class="btn btn-outline-secondary" href="javascript:void(0);">Test Log</a>
                 <div id="output" class="mt-5" style="outline: 1px solid silver; padding: 2em;">
                     <span class="text-muted">Output shows here...</span>
                 </div>
@@ -32,14 +33,14 @@
 
 {{define "js"}}
     <script>
-        const brokerBtn =  document.getElementById('brokenBtn');
-        const authBrokerBtn =  document.getElementById('authBrokerBtn');
+        const brokerBtn = document.getElementById('brokenBtn');
+        const authBrokerBtn = document.getElementById('authBrokerBtn');
+        const logBtn = document.getElementById('logBtn');
         const output = document.getElementById('output');
         const sent = document.getElementById('payload');
         const received = document.getElementById('received');
 
         authBrokerBtn.addEventListener('click', () => {
-
             const payload = {
                 action: "auth",
                 auth: {
@@ -83,10 +84,40 @@
                     received.innerHTML = JSON.stringify(data, null, 4)
                     if (data.error) {
                         console.log(data.message)
-                        // output.classList.add('alert-danger')
                     } else {
-                        // output.classList.remove('alert-danger')
                         output.innerHTML += `<br><strong>Response from broker service:</strong>: ${data.message}`
+                    }
+
+                })
+                .catch(e => {
+                    output.innerHTML += `<br><br>Error: ${e.message}`
+                })
+        })
+
+        logBtn.addEventListener('click', () => {
+            const payload = {
+                action: "log",
+                log: {
+                    name: "event",
+                    data: "Some kind of data"
+                }
+            }
+
+            const body = {
+                method: 'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload)
+            }
+
+            fetch('http://localhost:8080/handle', body)
+                .then(res => res.json())
+                .then(data => {
+                    sent.innerHTML = JSON.stringify(payload, null, 4)
+                    received.innerHTML = JSON.stringify(data, null, 4)
+                    if (data.error) {
+                        output.innerHTML += `<br><strong>Error:</strong> ${data.message}`
+                    } else {
+                        output.innerHTML += `<br><strong>Response from log broker service:</strong> ${data.message}`
                     }
 
                 })

@@ -36,6 +36,27 @@ services:
     environment:
       DSN: "host=postgres port=5432 user=postgres password=password dbname=users sslmode=disable timezone=UTC connect_timeout=5"
 
+  mail-service:
+    build:
+      context: ./mail-service
+      dockerfile: mail-service.dockerfile
+    restart: always
+#    ports:
+#      - "8083:80"
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      MAIL_DOMAIN: localhost
+#      MAIL_DOMAIN: "127.0.0.1"
+      MAIL_PORT: 1025
+      MAIL_HOST: mailhog
+      MAIL_ENCRYPTION: none
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      MAIL_NAME: "John Doe"
+      MAIL_ADDRESS: john.doe@example.com
+
   postgres:
     image: 'postgres:17'
     ports:
@@ -66,9 +87,24 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - 8081:8081
+      - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
       ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/
       ME_CONFIG_BASICAUTH: false
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+#    container_name: mailhog
+#    restart: always
+#    environment:
+#      MH_AUTH_FILE: /mailhog.auth
+#      MH_MAILDIR_PATH: /data
+#      MH_STORAGE: maildir
+#    volumes:
+#      - ./mailhog.auth:/mailhog.auth:ro
+#      - ./data:/data:rw

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"os"
+	"strings"
 	"testing"
 )
 
@@ -18,7 +19,10 @@ func TestParseContent(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result := parseContent(input)
+	result, err := parseContent(input, "")
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	expected, err := os.ReadFile(goldenFile)
 	if err != nil {
@@ -37,11 +41,14 @@ func TestParseContent(t *testing.T) {
 }
 
 func TestRun(t *testing.T) {
-	if err := run(inputFile); err != nil {
+	var mockStdOut bytes.Buffer
+
+	if err := run(inputFile, "", &mockStdOut, true); err != nil {
 		t.Fatal(err)
 	}
 
-	result, err := os.ReadFile(resultFile)
+	resultFileName := strings.TrimSpace(mockStdOut.String())
+	result, err := os.ReadFile(resultFileName)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -57,7 +64,7 @@ func TestRun(t *testing.T) {
 		t.Error("Result content does not match golden file")
 	}
 
-	if err = os.Remove(resultFile); err != nil {
+	if err = os.Remove(resultFileName); err != nil {
 		t.Fatal(err)
 	}
 }

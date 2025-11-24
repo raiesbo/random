@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cursor Dancer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        #messages {
+            border: 1px solid #ccc;
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #messageInput {
+            width: 300px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Cursor Dancer</h1>
+<div id="messages"></div>
+<input type="text" id="messageInput" placeholder="Enter your message">
+<button onclick="sendMessage()">Send Message</button>
+<script>
+    (async function () {
+        async function connectToServer() {
+            const ws = new WebSocket('ws://localhost:3000');
+            return new Promise((resolve, reject) => {
+                const timer = setInterval(() => {
+                    if (ws.readyState === 1) {
+                        clearInterval(timer);
+                        resolve(ws);
+                    }
+                }, 10);
+            });
+        }
+
+        const ws = await connectToServer();
+
+        ws.onopen = function () {
+            console.log('Connected to WebSocket server');
+        }
+
+        const messages = document.getElementById('messages');
+
+        ws.onmessage = function (event) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = event.data;
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            if (!input.value) return
+            ws.send(input.value);
+            input.value = '';
+        }
+
+        document.getElementById('messageInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }())
+</script>
+</body>
+</html>

@@ -5,18 +5,19 @@ import {WebSocketServer} from 'ws';
 import {v4} from "uuid";
 
 const PORT = process.env.PORT || 3000;
+const dir = import.meta.dirname;
 
 const clients = new Map();
 
 const app = express();
-app.use(express.static('public'));
+app.use(express.static(path.join(dir, 'public')));
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(dir, '/public/index.html')));
 
 const server = createServer(app);
 const wss = new WebSocketServer({server});
 
-wss.on('connection', function (ws) {
+wss.on('connection', (ws) => {
     const id = v4();
     const color = Math.floor(Math.random() * 360);
     const metadata = {id, color};
@@ -47,6 +48,6 @@ wss.on('connection', function (ws) {
     });
 });
 
-server.listen(PORT, function () {
+server.listen(PORT, () => {
     console.log(`Listening on http://localhost:${PORT}`);
 });

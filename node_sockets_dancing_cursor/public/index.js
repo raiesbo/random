@@ -1,6 +1,7 @@
 async function connectToServer() {
     const ws = new WebSocket('ws://localhost:3000/');
-    return new Promise((resolve, reject) => {
+
+    return new Promise((resolve) => {
         const timer = setInterval(() => {
             if (ws.readyState !== 1) return
             clearInterval(timer)
@@ -27,11 +28,6 @@ const getOrCreateCursorFor = (message) => {
 
 (async function () {
     const ws = await connectToServer();
-
-    // Connection opened
-    ws.onopen = () => {
-        console.log("Connection open!");
-    }
 
     document.body.onmousemove = (evt) => {
         const messageBody = {x: evt.clientX, y: evt.clientY}

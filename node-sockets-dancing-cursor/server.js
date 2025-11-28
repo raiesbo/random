@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import {createServer} from 'http';
-import {WebSocketServer} from 'ws';
+import {WebSocketServer, WebSocket} from 'ws';
 import {v4} from "uuid";
 import {createClient} from "redis";
 
@@ -28,7 +28,7 @@ await redisPublisher
 
 await redisSubscriber.subscribe('message', (message) => {
     [...wsClients.keys()].forEach(client => {
-        client.readyState === WebSocket.OPEN && client.send(message);
+        if (client.readyState === WebSocket.OPEN) client.send(message);
     });
 }, false);
 

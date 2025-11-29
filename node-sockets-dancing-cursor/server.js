@@ -53,9 +53,6 @@ wss.on('connection', (ws) => {
 
         const outbound = JSON.stringify(message);
         await redisPublisher.publish('message', outbound);
-
-
-        // [...wsClients.keys()].forEach(client => client.send(outbound));
     })
 
     ws.on('error', console.error);

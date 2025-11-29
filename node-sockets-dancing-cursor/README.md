@@ -20,7 +20,7 @@ The project implements a **Redis Pub/Sub** architecture to achieve horizontal sc
 
 2. **Start the Redis container:**
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 3. **Start the server:**

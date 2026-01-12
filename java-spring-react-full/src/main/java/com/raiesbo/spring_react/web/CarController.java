@@ -1,6 +1,5 @@
 package com.raiesbo.spring_react.web;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.raiesbo.spring_react.domain.Car;
 import com.raiesbo.spring_react.domain.CarRepository;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +13,6 @@ public class CarController {
         this.carRepository = repository;
     }
 
-    @JsonIgnore
     @GetMapping("/cars")
     public Iterable<Car> getCars() {
         return carRepository.findAll();

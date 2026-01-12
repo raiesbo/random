@@ -17,13 +17,13 @@ public class Car {
     public Car() {}
 
     public Car(String brand, String model, String color, String registrationNumber, int modelYear, int price, Owner owner) {
-        this.brand = brand;
-        this.model = model;
-        this.color = color;
-        this.registrationNumber = registrationNumber;
-        this.modelYear = modelYear;
-        this.price = price;
-        this.owner = owner;
+        this.setBrand(brand);
+        this.setModel(model);
+        this.setColor(color);
+        this.setRegistrationNumber(registrationNumber);
+        this.setModelYear(modelYear);
+        this.setPrice(price);
+        this.setOwner(owner);
     }
 
     public Long getId() {
@@ -46,12 +46,45 @@ public class Car {
         this.model = model;
     }
 
+    public int getModelYear() {
+        return modelYear;
+    }
+
     public Owner getOwner() {
         return owner;
     }
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setModelYear(int modelYear) {
+        this.modelYear = modelYear;
     }
 }
 

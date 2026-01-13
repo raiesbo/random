@@ -1,9 +1,6 @@
 package com.raiesbo.spring_react;
 
-import com.raiesbo.spring_react.domain.Car;
-import com.raiesbo.spring_react.domain.CarRepository;
-import com.raiesbo.spring_react.domain.Owner;
-import com.raiesbo.spring_react.domain.OwnerRepository;
+import com.raiesbo.spring_react.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -18,10 +15,12 @@ public class SpringReactApplication implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(SpringReactApplication.class);
     private final CarRepository carRepository;
     private final OwnerRepository ownerRepository;
+    private final AppUserRepository userRepository;
 
-    public SpringReactApplication(CarRepository carRepository, OwnerRepository ownerRepository) {
+    public SpringReactApplication(CarRepository carRepository, OwnerRepository ownerRepository, AppUserRepository userRepository) {
         this.carRepository = carRepository;
         this.ownerRepository = ownerRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -40,6 +39,11 @@ public class SpringReactApplication implements CommandLineRunner {
         for (Car car : carRepository.findAll()) {
             logger.info("brand: {}, model: {}", car.getBrand(), car.getModel());
         }
+
+        // username: user, password: user
+        userRepository.save(new AppUser("user", "$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue", "USER"));
+        // Username: admin, password: admin
+        userRepository.save(new AppUser("admin", "$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW", "ADMIN"));
     }
 
     public static void main(String[] args) {

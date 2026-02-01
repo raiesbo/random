@@ -1,4 +1,5 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
+import 'dotenv/config';
+import { drizzle } from "drizzle-orm/node-postgres";
 import pg from 'pg';
 
 if (!process.env.DATABASE_URL) {

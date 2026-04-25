@@ -1,0 +1,83 @@
+# -- PODS
+
+# Show all pods
+kubctl get pods
+kubctl get pods -o wide // shows additional information
+
+# -- REPLICA SET
+# Replica Sets create automatically the required pods
+
+Requires spec values:
+- selector
+- replicas
+- templates
+
+# Create a replica set
+kubectl create -f replicaset-definition.yml
+
+# Get replica set information
+kubectl get replicaset
+
+# Delete Replica Set (and all underlying Pods)
+kubctl delete replicaset myapp-replicaset
+
+# Update Replica Set definition changes
+kubectl replace -f replicaset-definition.yml
+
+# Update Replica Set replicas number (file stays the same)
+kubectl scale -replicas=6 -f replicaset-definition.yml
+
+# Edit Replica Set config
+kubectl edit replicaset myapp-replicaset
+
+# Direct scale
+kubectl scale replicaset myapp-replicaset --replicas=5
+
+# -- DEPLOYMENTS
+# Desployments automatically create replica sets.
+
+# Create deployment
+kubectl create -f dployment-definition.yml
+
+# Get deployments
+kubectl get deployments
+
+# -- ALL OBJECTS
+# This command shows all Kubernetes objects
+kubectl get all
+
+# -- -- SERVICES:
+# -- Node Port
+# The kubernete's node makes an internal Pod Port accessible to the OUTSIDE by mapping
+# a Node Port to a Pord Port, Node Port (accessible from outside) => Pod Port. 
+# If assigned to multiple pods (replicas) it uses a random algorithm to balance the load. 
+kubectl create -f service-definition.yml
+
+# -- Cluster IP
+# Port accessbility for INTERNAL services.
+
+# -- Load Balancer
+# Provisions a load balancer for our application.
+
+## -- ROLLOUTS AND VERSIONING
+# A deployment creation generates a new rollout (new deployment revision)
+# To se the rollout status
+kubectl rollout status deployment/myapp-deployment
+
+# To see the rollout version
+kubectl rollout history deployment/myapp-deployment
+
+# How to update the deployment?
+# if definition changes: `kubectl apply -f deployment-definition.yml`
+# if
+
+# Manual deployment update
+kubectl edit deployment frontend
+
+# Automatic deployment update
+kubectl set image deploy frontend simple-webapp=kodekloud/webapp-color:v2
+
+# Rollback -> UNDO a rollout
+kubectl rollout undo deployment myapp-deployment
+
+## -- UPDATES AND ROLLBACKS

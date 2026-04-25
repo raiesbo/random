@@ -1,0 +1,16 @@
+# Definition of NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  type: NodePort # Type of service
+  ports:
+    - targetPort: 80 # If not provided, assumes it is the same as Port
+      port: 80 # Port on the service object
+      nodePort: 30008 # Outside port. If not provided is automatic
+
+  selector: # Labels from the Pod definiton (metadata.labels)
+    app: nginx
+    type: front-end
+

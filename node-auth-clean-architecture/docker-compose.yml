@@ -1,0 +1,12 @@
+services:
+  mongo-db:
+    image: mongo:6.0.10
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - ./mongo:/data/db  # Connect "mongo" directory to the space where Mongo stores the information: "mongo/db".
+                          # Creates a bridge between the local directory and the Mongo database.
+    ports:
+      - "27017:27017"
